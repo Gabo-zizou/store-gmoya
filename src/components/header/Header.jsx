@@ -4,7 +4,7 @@ import "./Header.css";
 function Header (){
     return (
         <section className="header">
-            <div className="logo">Logo</div>
+            <div className="logo">Logo Store Gmoya</div>
             <div className="navbar">
                 <a class="active" href="">Home</a>
                 <a href="">Quienes Somos</a>
