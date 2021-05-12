@@ -13,12 +13,12 @@
     /* clear: both; */
     background-color: gold;
     overflow: hidden;
-    background-color: #f1f1f1;
-    padding: 20px 10px;
+    background-color: black;
+    padding: 10px;
 }
 .navbar a {
     float: left;
-    color: black;
+    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -26,12 +26,12 @@
     line-height: 25px;
 }
 .navbar a:hover {
-    background-color: #ddd;
+    background-color: #e1f738;
     color: black;
   }
   
 /* Style the active/current link*/
 .navbar a.active {
-    background-color: dodgerblue;
-    color: white;
+    background-color: #e1f738;
+    color: black;
 }
