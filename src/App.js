@@ -10,7 +10,7 @@ import ContenedorIndex from "./components/pages/content";
 
 function App() {
 
-  const [stock, setStock] = useState(3);
+  const [stock, setStock] = useState(5);
   const [mensajeStock, setMensajeStock] = useState(false);
   const [contador, setContador] = useState(0);
   const [actualizacion, setActualizacion] = useState(Date());  

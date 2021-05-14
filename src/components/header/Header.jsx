@@ -6,7 +6,7 @@ import ShoppingCart from '../shoppingCart/shoppingCart'
 function Header ({contador}){
     return (
         <header>
-            <p>Header Logo { contador }</p>
+            <p>Header Logo</p>
             <ShoppingCart 
                 contador={contador}
             />
