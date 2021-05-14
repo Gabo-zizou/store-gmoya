@@ -3,11 +3,13 @@ import NavBar from '../navBar/navBar';
 import "./Header.css";
 import ShoppingCart from '../shoppingCart/shoppingCart'
 
-function Header (){
+function Header ({contador}){
     return (
         <header>
-            <p>Header Logo</p>
-            <ShoppingCart />
+            <p>Header Logo { contador }</p>
+            <ShoppingCart 
+                contador={contador}
+            />
         </header>
     );
 }

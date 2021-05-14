@@ -84,6 +84,12 @@ footer {
   min-height: 200px;
   padding: .25em 0;
 }
+#principal .detalle{
+  margin: 6px;
+}
+#principal .detalle .mensajeError{
+  color: red;
+}
 aside {
   background-color: #121212;
   display: inline-block;
@@ -96,6 +102,21 @@ aside {
 }
 aside {
   margin-top:0.5em;
+}
+
+.btn{
+  background-color: #e1f738;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
+  border-radius: 1px;
+  border: none;
+  margin: 6px;
+}
+.btn:hover{
+  background-color: #ffffff;
 }
 
 /* MEDIA QUERY */
