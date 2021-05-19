@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NavBar from '../navBar/navBar';
 import "./Header.css";
-import ShoppingCart from '../shoppingCart/shoppingCart'
+
+import CartWidget from '../CartWidget/CartWidget';
 
 function Header ({contador}){
     return (
-        <header>
-            <p>Header Logo</p>
-            <ShoppingCart 
-                contador={contador}
-            />
-        </header>
+        <Fragment>
+            <header>
+                <p>Header Logo</p>
+                <CartWidget 
+                    contador={contador}
+                />
+            </header>
+            <NavBar />
+        </Fragment>
     );
 }
 export default Header;

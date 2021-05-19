@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-function ShoppingCart ({contador}){
+function CartWidget ({contador}){
     return (
         <div className="shoppingCart">
             <FontAwesomeIcon icon={faShoppingCart} />
@@ -10,4 +10,4 @@ function ShoppingCart ({contador}){
         </div>
     );
 }
-export default ShoppingCart;
+export default CartWidget;
