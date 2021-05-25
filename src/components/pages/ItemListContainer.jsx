@@ -1,39 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import ItemCount from '../CartWidget/ItemCount';
+// import ItemCount from '../CartWidget/ItemCount';
+import Aside from './aside';
+import ItemList from './ItemList';
 
 function ItemListContainer({contador, setContador}) {
 
-    const [stock, setStock] = useState(5);
-    const [mensajeStock, setMensajeStock] = useState(false);
+
+    
+    const [category, setCategory] = useState(null);
+    const [categoryActive, setCategoryActive] = useState(null);
   
-    const agregarProducto = (value) => {
-          if(contador >= stock){
-            setMensajeStock('stock no disponible');
-          }else{
-            setContador(contador + value);
-            setMensajeStock('');
+
+
+    useEffect(() => {
+      const fetchCategories = async () => {
+          try {
+            const response = await fetch(
+                "https://api.mercadolibre.com/sites/MLA/categories"
+            );
+            const dataCategories = await response.json();
+            setCategory(dataCategories);
+            if(dataCategories){
+              setCategoryActive(dataCategories[0].id);
+            }
+          } catch (e) {
+            // reportar el error a Sentry
+            console.log(e);
           }
-    };
-  
-    const quitarProducto = (value) => {
-          if(contador < 1){
-            setMensajeStock('Solo puedes quitar productos que existan, jamas negativos');
-          }else{
-            setContador(contador + value);
-            setMensajeStock('');
-          }
-    }
+        };
+        fetchCategories();
+    }, []);
 
     return (
         <section id="content">
-        
-            <aside>
-                Aside
-            </aside>
+
+            <Aside
+              category={category}
+              setCategoryActive={setCategoryActive}
+              categoryActive={categoryActive}
+            />
 
             <section id="principal">
-                <div className="detalle">
+              <ItemList 
+                categoryActive={categoryActive}
+                contador={contador}
+                setContador={setContador}
+              />
 
+                {/* <div className="detalle">
                     <div>
                         <p>Producto: Mantequilla de Maní</p>
                         <p>Carro actual tiene: { contador }</p>
@@ -46,13 +60,11 @@ function ItemListContainer({contador, setContador}) {
                             null
                         }
                     </div>
-
                     <ItemCount 
                         agregarProducto={agregarProducto}
                         quitarProducto={quitarProducto}
                     />
-
-                </div>
+                </div> */}
 
             </section>
         </section>

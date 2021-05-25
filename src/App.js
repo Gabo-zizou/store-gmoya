@@ -11,7 +11,7 @@ import Footer from "./components/footer/Footer";
 
 function App() {
 
-  const [ contador, setContador ] = useState(false);
+  const [ contador, setContador ] = useState(0);
 
   return (
 
@@ -25,13 +25,6 @@ function App() {
               contador={contador}
               setContador={setContador}
           />
-
-          {/* <Contenedor 
-            stock={stock}
-            mensajeStock={mensajeStock}
-            agregarProducto={agregarProducto}
-            quitarProducto={quitarProducto}
-          /> */}
 
           <Footer />
       </div>

@@ -73,9 +73,9 @@ footer {
 }
 #content {
   margin: 0 auto;
-  
   padding: 0;
   text-align: justify;
+  display: flex;
 }
 #principal{
   background-color: #121212;
@@ -84,6 +84,63 @@ footer {
   min-height: 200px;
   padding: .25em 0;
 }
+
+#principal .card{
+  float: left;
+  width: 31%;
+  margin: 1%;
+  min-height: 256px;
+  background-color: white;
+  border-radius: 2px;
+  border: solid 1px #cacaca
+}
+#principal .card .id{
+  position: absolute;
+  background-color: #cacaca;
+  font-size: 12px;
+  color: black;
+  height: 20px;
+  width: auto;
+  padding: 1px;
+  text-align: center;
+}
+#principal .card .image{
+  background-color: white;
+  padding-top: 20px;
+  height: 120px;
+  text-align: center;
+}
+#principal .card .titulo{
+  color: #232323;
+  padding: 0px 10px;
+  min-height: 50px;
+  font-size: 12px;
+}
+#principal .card .precio{
+  color: #232323;
+  padding: 0px 10px;
+  font-size: 12px;
+  min-height: 20px;
+  font-weight: bold;
+}
+#principal .card button{
+  clear: both;
+  display: block;
+  margin: 6px 10px;
+   width:100px;
+   bottom:0px;
+   background-color: #e1f738;
+   color: black;
+   border: none;
+   padding: 10px;
+   width: 90%;
+   transition: 0.3s;
+}
+#principal .card button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
 #principal .detalle{
   margin: 6px;
 }
@@ -100,8 +157,26 @@ aside {
   vertical-align: top;
   width: 100%;
 }
-aside {
-  margin-top:0.5em;
+aside ul {
+  margin: 0px 10px;
+  font-size: 14px;
+}
+
+aside ul li {
+  text-align: left;
+  line-height: 1.5;
+  padding: 4px;
+  cursor: pointer;
+}
+aside ul li.active {
+  line-height: 1.5;
+  background-color: #e1f738;
+  color: black;
+}
+aside ul li:hover {
+  line-height: 1.5;
+  background-color: #e1f738;
+  color: black;
 }
 
 .btn{
