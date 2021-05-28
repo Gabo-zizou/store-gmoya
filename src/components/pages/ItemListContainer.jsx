@@ -5,12 +5,8 @@ import ItemList from './ItemList';
 
 function ItemListContainer({contador, setContador}) {
 
-
-    
     const [category, setCategory] = useState(null);
     const [categoryActive, setCategoryActive] = useState(null);
-  
-
 
     useEffect(() => {
       const fetchCategories = async () => {
@@ -46,25 +42,6 @@ function ItemListContainer({contador, setContador}) {
                 contador={contador}
                 setContador={setContador}
               />
-
-                {/* <div className="detalle">
-                    <div>
-                        <p>Producto: Mantequilla de Maní</p>
-                        <p>Carro actual tiene: { contador }</p>
-                        <p>Stock disponible: { stock }</p>
-                        {
-                            mensajeStock
-                            ?
-                            <p className="mensajeError">{ mensajeStock }</p>
-                            :
-                            null
-                        }
-                    </div>
-                    <ItemCount 
-                        agregarProducto={agregarProducto}
-                        quitarProducto={quitarProducto}
-                    />
-                </div> */}
 
             </section>
         </section>

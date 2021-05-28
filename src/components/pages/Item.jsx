@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import ItemCount from '../CartWidget/ItemCount';
+import { Link } from 'react-router-dom';
 
 function Item({ id, image, titulo, precio, stock_disponible, agregarProducto, quitarProducto}) {
     
@@ -26,15 +27,13 @@ function Item({ id, image, titulo, precio, stock_disponible, agregarProducto, qu
                         stock_disponible={stock_disponible}
                 />
                 
-                <button>
-                    Ver mas <small>(Pronto)</small><FontAwesomeIcon icon={faPlus} />
-                </button>
+                <Link to={`/detail/${titulo}`}>
+                    <button>
+                        Ver mas <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                </Link>
+                
         </div>
     )
 }
 export default Item;
-
-// trabajamos en el nuevo filtro AngloAmerican
-// Comienzo de solicitud de peticion de Rut
-// Comienzo de mensajes de buerbujas
-// Pendientes Endpoints
