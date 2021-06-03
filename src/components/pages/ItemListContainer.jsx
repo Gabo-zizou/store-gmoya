@@ -60,13 +60,6 @@ function ItemListContainer({contador, setContador}) {
                   categoryActive={categoryActive}
               />
         }
-
-              
-
-
-              
-
-
         </section>
     )
 }
