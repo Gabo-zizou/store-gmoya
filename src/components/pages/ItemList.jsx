@@ -1,38 +1,48 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Item from './Item';
+import Loading from '../commons/Loading';
 
 function ItemList({categoryActive, contador, setContador}) {
 
     const [cards, setCards] = useState(null);
     const [productStock, setProductStock] = useState([]);
+    const [loading, loadingState] = useState(true);
 
     useEffect(() => {
+      
         const fetchProducts = async () => {
-          try {
-            const response = await fetch(
-              `https://api.mercadolibre.com/sites/MLA/search?category=${categoryActive}#json`
-            );
-            const data = await response.json();
-            setCards(data.results);
+          
+            try {
+              const response = await fetch(
+                  `https://api-rest-store-gmoya-default-rtdb.firebaseio.com/productos.json`
+              );
+              const data = await response.json();
+                  
+                  let dataListArray = [];
+                      data.map( (item, index) => {
+                              if(item && categoryActive == item.categoria_id){
+                                  dataListArray.push(item);
+                              }
+                      });
+                      setCards(dataListArray);
+                      loadingState(false);
 
-            let dataListArray = [];
-                data.results !== undefined &&
-                data.results.map( (item, index) => {
-                    var data = {};
-                        data.id = item.id;
-                        data.stock = item.available_quantity;
-                        dataListArray.push(data);
-            });
-            setProductStock(dataListArray);
+            } catch (e) {
+              // reportar el error a Sentry
+              console.log(e);
+            }
 
-          } catch (e) {
-            // reportar el error a Sentry
-            console.log(e);
-          }
         };
-    
         fetchProducts();
+
+        // console.log('test:: ',categoryActive);
+
       }, [categoryActive]);
+
+
+      setTimeout(function() {
+          loadingState(false);
+      }, 2000);
 
       const [stock, setStock] = useState(50);
       const [mensajeStock, setMensajeStock] = useState(false);
@@ -55,24 +65,34 @@ function ItemList({categoryActive, contador, setContador}) {
       }
 
     return (
-        <Fragment>
+        <section id="principal">
+
             {
-                cards?.map((item) => (
-                    <Item 
-                        id={item.id}
-                        image={item.thumbnail}
-                        titulo={item.title}
-                        precio={item.price}
-                        stock_disponible={item.available_quantity}
-                        agregarProducto={agregarProducto}
-                        quitarProducto={quitarProducto}
-                        contador={contador}
-                        setContador={setContador}
-                        setStock={setStock}
-                    />
-                ))
+              loading
+              ?
+                  <Loading
+                          type={'spin'}
+                          height={60}
+                          width={60}
+                  />
+              : 
+                  cards?.map((item) => (
+                      <Item 
+                          key={item.id}
+                          id={item.id}
+                          image={item.image}
+                          titulo={item.titulo}
+                          precio={item.precio}
+                          stock_disponible={item.cantidad}
+                          agregarProducto={agregarProducto}
+                          quitarProducto={quitarProducto}
+                          contador={contador}
+                          setContador={setContador}
+                          setStock={setStock}
+                      />
+                  ))
             }
-        </Fragment>
+        </section>
     )
 }
 export default ItemList;

@@ -8,8 +8,9 @@ import Header from "./components/header/Header";
 import NavBar from "./components/navBar/navBar";
 // import Contenedor from "./components/pages/content";
 import ItemListContainer from "./components/pages/ItemListContainer";
-import ItemDetailContainer from "./components/pages/ItemDetailContainer";
+import ItemDetail from "./components/pages/ItemDetail";
 import Home from "./components/pages/Home";
+import NotFound from "./components/pages/NotFound";
 import Contacto from "./components/pages/Contacto";
 import Footer from "./components/footer/Footer";
 // import ContenedorIndex from "./components/pages/content";
@@ -27,14 +28,27 @@ function App() {
             />
 
               <Switch>
-                <Route exact path="/productos">
+              <Route exact path="/">
+                    <Home
+                        contador={contador}
+                        setContador={setContador}
+                    />
+                </Route>
+                <Route exact path="/category">
                     <ItemListContainer
                         contador={contador}
                         setContador={setContador}
                     />
                 </Route>
+                <Route exact path="/category/:categoriaId">
+                    <ItemListContainer
+                        contador={contador}
+                        setContador={setContador}
+                    />
+                </Route>
+
                 <Route exact path="/detail/:productId">
-                    <ItemDetailContainer 
+                    <ItemDetail 
                         contador={contador}
                         setContador={setContador}
                     />
@@ -42,9 +56,9 @@ function App() {
                 <Route exact path="/contacto">
                     <Contacto />
                 </Route>
-                {/* <Route exact path="/">
-                    <Home />
-                </Route> */}
+
+                <Route component={NotFound} />
+
               </Switch>
 
             <Footer />

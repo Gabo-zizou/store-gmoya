@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 // import ItemCount from '../CartWidget/ItemCount';
-import Aside from './aside';
+import Aside from './Aside';
 import ItemList from './ItemList';
+import { useParams } from 'react-router-dom';
 
 function ItemListContainer({contador, setContador}) {
+  
+    const { categoriaId } = useParams();
 
     const [category, setCategory] = useState(null);
     const [categoryActive, setCategoryActive] = useState(null);
@@ -12,12 +15,21 @@ function ItemListContainer({contador, setContador}) {
       const fetchCategories = async () => {
           try {
             const response = await fetch(
-                "https://api.mercadolibre.com/sites/MLA/categories"
+                "https://api-rest-store-gmoya-default-rtdb.firebaseio.com/categorias.json"
             );
             const dataCategories = await response.json();
-            setCategory(dataCategories);
+
+            let dataListArray = [];
+                  dataCategories.map((item, index) => {
+                        if(item){
+                           dataListArray.push(item);
+                        }
+            });
+            //console.log(dataListArray);
+            setCategory(dataListArray);
+            //mostar el primer registro
             if(dataCategories){
-              setCategoryActive(dataCategories[0].id);
+              setCategoryActive(dataCategories[1].id);
             }
           } catch (e) {
             // reportar el error a Sentry
@@ -25,25 +37,36 @@ function ItemListContainer({contador, setContador}) {
           }
         };
         fetchCategories();
+
+        // console.log(category);
+
     }, []);
 
     return (
         <section id="content">
 
-            <Aside
-              category={category}
-              setCategoryActive={setCategoryActive}
-              categoryActive={categoryActive}
-            />
-
-            <section id="principal">
+        {
+          categoriaId
+          ?
               <ItemList 
-                categoryActive={categoryActive}
+                categoryActive={categoriaId}
                 contador={contador}
                 setContador={setContador}
               />
+          :
+              <Aside
+                  category={category}
+                  setCategoryActive={setCategoryActive}
+                  categoryActive={categoryActive}
+              />
+        }
 
-            </section>
+              
+
+
+              
+
+
         </section>
     )
 }

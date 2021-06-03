@@ -5,8 +5,8 @@ function NavBar (){
 
     return (
         <nav className="navbar">
-                {/* <Link to={'/'}>Home</Link> */}
-                <Link to={'/productos'}>Productos</Link>
+                <Link to={'/'}>Home</Link>
+                <Link to={'/category'}>Productos</Link>
                 <Link to={'/contacto'}>Contacto</Link>
         </nav>
     );

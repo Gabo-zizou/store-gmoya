@@ -1,16 +1,48 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Link
+  } from "react-router-dom";
 
-function aside({category, setCategoryActive, categoryActive}) {
+function Aside({category, setCategoryActive, categoryActive}) {
+
+
     return (
-        <aside>
-            <ul>
+        <div className="category">
+
+            {
+                category?.map((item) => (
+                    <Link 
+                            to={`/category/${item.id}`}
+                            key={ item.id }
+                            >
+                        <div className="contenedor"
+                            >
+                            <img src={ item.image } width="300" height="200" className="image" />
+                            <p>{ item.titulo }</p>
+                        </div>
+                    </Link>
+                ))
+            }
+
+            {/* <ul>
                 {
                     category?.map((item) => (
-                        <li key={ item.id } className={ categoryActive === item.id ? 'active' : null } onClick={() => setCategoryActive(item.id)}>{ item.name }</li>
+                        <Link 
+                            to={`/category/${item.id}`}
+                            key={ item.id }
+                            >
+                            <li
+                                key={ item.id }
+                                className={ categoryActive === item.id ? 'active' : null } 
+                                >
+                                { item.titulo }
+                            </li>
+                        </Link>
                     ))
                 }
-            </ul>
-        </aside>
+            </ul> */}
+        </div>
     )
 }
-export default aside;
+export default Aside;

@@ -185,6 +185,38 @@ footer {
 #principal .detalle .mensajeError{
   color: red;
 }
+
+#principal .detalle .imagen{
+  float: left;
+  text-align: center;
+  width: 40%;
+}
+#principal .detalle .parrafo{
+  float: right;
+  text-align: left;
+  width: 60%;
+}
+
+.category{
+  width: 100%;
+}
+.category .contenedor{
+  text-align: center;
+  float: left;
+  margin: 9px;
+  width: 300px;
+  background-color: white;
+}
+.category .contenedor .image{
+  width: 100%;
+}
+.category .contenedor p{
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
+  padding: 6px;
+}
+
 aside {
   background-color: #121212;
   display: inline-block;
@@ -205,6 +237,7 @@ aside ul li {
   line-height: 1.5;
   padding: 4px;
   cursor: pointer;
+  list-style: none;
 }
 aside ul li.active {
   line-height: 1.5;
@@ -238,13 +271,17 @@ aside ul li:hover {
     font-size:5em;
   }
   #principal {
-    width: 70%;
+    width: 100%;
   }
   aside {
     width: 29%;
     margin-top:0;
   }
   #detalle {
+    width: 100%;
+    background-color: #121212;
+  }
+  .category{
     width: 100%;
     background-color: #121212;
   }
