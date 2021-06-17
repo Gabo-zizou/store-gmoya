@@ -2,22 +2,18 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Item from './Item';
 import Loading from '../commons/Loading';
 
-function ItemList({categoryActive, contador, setContador}) {
+function ItemList({categoryActive, contador, setContador, agregarProducto, quitarProducto, setStock}) {
 
     const [cards, setCards] = useState(null);
-    const [productStock, setProductStock] = useState([]);
     const [loading, loadingState] = useState(true);
 
     useEffect(() => {
-      
         const fetchProducts = async () => {
-          
             try {
               const response = await fetch(
                   `https://api-rest-store-gmoya-default-rtdb.firebaseio.com/productos.json`
               );
               const data = await response.json();
-                  
                   let dataListArray = [];
                       data.map( (item, index) => {
                               if(item && categoryActive == item.categoria_id){
@@ -26,43 +22,19 @@ function ItemList({categoryActive, contador, setContador}) {
                       });
                       setCards(dataListArray);
                       loadingState(false);
-
             } catch (e) {
               // reportar el error a Sentry
               console.log(e);
             }
-
         };
         fetchProducts();
-
         // console.log('test:: ',categoryActive);
-
       }, [categoryActive]);
 
 
       setTimeout(function() {
           loadingState(false);
       }, 2000);
-
-      const [stock, setStock] = useState(50);
-      const [mensajeStock, setMensajeStock] = useState(false);
-      const agregarProducto = (value) => {
-            if(contador >= stock){
-              setMensajeStock('stock no disponible');
-            }else{
-              setContador(contador + value);
-              setMensajeStock('');
-            }
-      };
-    
-      const quitarProducto = (value) => {
-            if(contador < 1){
-              setMensajeStock('Solo puedes quitar productos que existan, jamas negativos');
-            }else{
-              setContador(contador + value);
-              setMensajeStock('');
-            }
-      }
 
     return (
         <section id="principal">

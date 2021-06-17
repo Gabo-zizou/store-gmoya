@@ -27,7 +27,7 @@ function Item({ id, image, titulo, precio, stock_disponible, agregarProducto, qu
                         stock_disponible={stock_disponible}
                 />
                 
-                <Link to={`/detail/${id}`}>
+                <Link to={`/item/${id}`}>
                     <button>
                         Ver mas <FontAwesomeIcon icon={faPlus} />
                     </button>

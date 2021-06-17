@@ -4,13 +4,22 @@ import Aside from './Aside';
 import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
 
+import ItemDetail from './ItemDetail';
+
 function ItemListContainer({contador, setContador}) {
   
-    const { categoriaId } = useParams();
+    const { categoriaId, productId } = useParams();
 
+    //hooks categorias
     const [category, setCategory] = useState(null);
     const [categoryActive, setCategoryActive] = useState(null);
 
+    //hooks productos
+    const [detail, setDetail] = useState({});
+    const [stock, setStock] = useState(50);
+    const [mensajeStock, setMensajeStock] = useState(false);
+
+    //categorias
     useEffect(() => {
       const fetchCategories = async () => {
           try {
@@ -37,10 +46,48 @@ function ItemListContainer({contador, setContador}) {
           }
         };
         fetchCategories();
-
         // console.log(category);
-
     }, []);
+
+    //detalle producto
+    useEffect(() => {
+      const fetchDetail = async () => {
+          try {
+              const response = await fetch(
+                  `https://api-rest-store-gmoya-default-rtdb.firebaseio.com/productos/${productId}.json`
+              );
+              const dataCategories = await response.json();
+              setDetail(dataCategories);
+              setStock(dataCategories.cantidad);
+          } catch (e) {
+            // reportar el error a Sentry
+            console.log(e);
+          }
+        };
+      
+        if(productId){
+          fetchDetail();
+        }
+    }, [productId]);
+
+    //manejo de stock
+    const agregarProducto = (value) => {
+          if(contador >= stock){
+            setMensajeStock('stock no disponible');
+          }else{
+            setContador(contador + value);
+            setMensajeStock('');
+          }
+    };
+
+    const quitarProducto = (value) => {
+          if(contador < 1){
+            setMensajeStock('Solo puedes quitar productos que existan, jamas negativos');
+          }else{
+            setContador(contador + value);
+            setMensajeStock('');
+          }
+    }
 
     return (
         <section id="content">
@@ -52,14 +99,31 @@ function ItemListContainer({contador, setContador}) {
                 categoryActive={categoriaId}
                 contador={contador}
                 setContador={setContador}
+                agregarProducto={agregarProducto}
+                quitarProducto={quitarProducto}
+                setStock={setStock}
               />
           :
-              <Aside
+            (
+              productId 
+              ? 
+                <ItemDetail 
+                  detail={detail}
+                  stock={stock}
+                  setMensajeStock={setMensajeStock}
+                  mensajeStock={mensajeStock}
+                  agregarProducto={agregarProducto}
+                  quitarProducto={quitarProducto}
+                />
+              :
+                <Aside
                   category={category}
                   setCategoryActive={setCategoryActive}
                   categoryActive={categoryActive}
-              />
+                />
+            )
         }
+
         </section>
     )
 }

@@ -29,17 +29,17 @@ function App() {
 
               <Switch>
               <Route exact path="/">
-                    <Home
-                        contador={contador}
-                        setContador={setContador}
-                    />
-                </Route>
-                <Route exact path="/category">
                     <ItemListContainer
                         contador={contador}
                         setContador={setContador}
                     />
                 </Route>
+                {/* <Route exact path="/category">
+                    <ItemListContainer
+                        contador={contador}
+                        setContador={setContador}
+                    />
+                </Route> */}
                 <Route exact path="/category/:categoriaId">
                     <ItemListContainer
                         contador={contador}
@@ -47,11 +47,15 @@ function App() {
                     />
                 </Route>
 
-                <Route exact path="/detail/:productId">
-                    <ItemDetail 
+                <Route exact path="/item/:productId">
+                    <ItemListContainer
                         contador={contador}
                         setContador={setContador}
                     />
+                    {/* <ItemDetail 
+                        contador={contador}
+                        setContador={setContador}
+                    /> */}
                 </Route>
                 <Route exact path="/contacto">
                     <Contacto />

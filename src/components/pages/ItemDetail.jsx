@@ -2,53 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemCount from '../CartWidget/ItemCount';
 
-function ItemDetail({contador, setContador}) {
-
-    const { productId } = useParams();
-    const [detail, setDetail] = useState({});
-    const [stock, setStock] = useState(50);
-    const [mensajeStock, setMensajeStock] = useState(false);
-
-    const agregarProducto = (value) => {
-        if(contador >= stock){
-          setMensajeStock('stock no disponible');
-        }else{
-          setContador(contador + value);
-          setMensajeStock('');
-        }
-  };
-
-  const quitarProducto = (value) => {
-        if(contador < 1){
-          setMensajeStock('Solo puedes quitar productos que existan, jamas negativos');
-        }else{
-          setContador(contador + value);
-          setMensajeStock('');
-        }
-  }
-
-    useEffect(() => {
-        
-        const fetchDetail = async () => {
-            try {
-                const response = await fetch(
-                    `https://api-rest-store-gmoya-default-rtdb.firebaseio.com/productos/${productId}.json`
-                );
-                const dataCategories = await response.json();
-                setDetail(dataCategories);
-                setStock(dataCategories.cantidad);
-            } catch (e) {
-              // reportar el error a Sentry
-              console.log(e);
-            }
-          };
-        
-          if(productId){
-            fetchDetail();
-          }
-
-
-      }, [productId]);
+function ItemDetail({detail,contador, setContador, setMensajeStock, stock, mensajeStock, agregarProducto, quitarProducto}) {
 
     return (
         <section id="principal">
@@ -57,7 +11,6 @@ function ItemDetail({contador, setContador}) {
             <div className="imagen">
                 <img src={detail.image} width="260" />
             </div>
-            
 
             <div className="parrafo">
                 <p><b>Producto</b>: { detail.titulo }</p>
@@ -79,7 +32,6 @@ function ItemDetail({contador, setContador}) {
                     :
                     null
                 }
-                
                 
             </div>
 
